@@ -48,6 +48,9 @@ export class EthereumProvider {
         const response = await this.postRequest(body);
         return this.fromHex(response.result)
     }
+    async getTokensBalancesByAddress(address: string) {
+        
+    }
     prepareCall(address: string, method: string) {
         const preMethod = `0x${keccak256(method).toString('hex')}`.slice(0,10);
         const preAddress = address.startsWith('0x')? address.slice(2): address
