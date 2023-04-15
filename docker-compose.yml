@@ -1,0 +1,7 @@
+version: '2'
+services:
+  bruter:
+    build: .
+    image: orca-scan-bot-latest
+    env_file:
+      - .env

@@ -18,7 +18,7 @@ bot.use(async (ctx, next) => {
     console.timeEnd(`Processing update ${ctx.update.update_id}`);
 })
 
-const checkbalancebutton = Markup.button.callback('Check balance    ', '/check_balance')
+const checkbalancebutton = Markup.button.callback('Check balance', '/check_balance')
 
 bot.command('check_balance', async (ctx: Context) => {
   try {
