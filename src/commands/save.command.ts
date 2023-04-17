@@ -26,10 +26,13 @@ export class SaveCommand extends Command {
                         address: address!,
                         telegram_user_id: ctx.message.from.id.toString()
                     })
-                    ctx.session.wallets? ctx.session.wallets.push(wallet):ctx.session.wallets=[wallet];
-                    console.log(ctx.session);
-                    ctx.copyMessage(ctx.message.chat.id, keyboard);
-                    this.saveMode = false;
+                    if (wallet) {
+                        ctx.session.wallets? ctx.session.wallets.push(wallet):ctx.session.wallets=[wallet];
+                        console.log(ctx.session);
+                        ctx.copyMessage(ctx.message.chat.id, keyboard);
+                        this.saveMode = false;
+                    }
+                    ctx.reply('Address already exist')
                 } else {
                     ctx.reply('No address found, try again')
                 }

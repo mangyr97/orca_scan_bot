@@ -5,9 +5,9 @@ export interface creteWalletOptions {
     telegram_user_id: string
 }
 export interface IOrcascan {
-    createWallet(options: creteWalletOptions): Promise<IWallet>;
-    getWalletById(id: string): Promise<IWallet>;
-    getWalletByTgId(id: string): Promise<IWallet>;
-    getAllWallets(): Promise<IWallet[]>;
-    getBalance(address: string): Promise<string>;
+    createWallet(options: creteWalletOptions): Promise<IWallet|undefined>;
+    getWalletById(id: string): Promise<IWallet|undefined>;
+    getWalletByTgId(id: string): Promise<IWallet|undefined>;
+    getAllWallets(): Promise<IWallet[]|undefined>;
+    getBalance(address: string): Promise<string|undefined>;
 }

@@ -12,19 +12,22 @@ export class BalanceCommand extends Command {
         this.bot.action("balance", async (ctx)=>{
             if (ctx.session.wallets) {
                 const balance = await this.orca.getBalance(ctx.session.wallets[0].address);
-                console.log(balance);
-                ctx.reply(balance, Markup.inlineKeyboard([
-                    Markup.button.callback("Update","update_balance"),
-                ]))
+                if (balance) {
+                    console.log(balance);
+                    ctx.reply(balance, Markup.inlineKeyboard([
+                        Markup.button.callback("Update","update_balance"),
+                    ]));
+                } else {
+                    ctx.reply('Something going wrong');
+                }
             } 
         });
         this.bot.action("update_balance", async (ctx)=>{
             if (ctx.session.wallets) {
                 const balance = await this.orca.getBalance(ctx.session.wallets[0].address);
                 console.log(balance);
-                ctx.reply(balance, Markup.inlineKeyboard([
-                    Markup.button.callback("Update","update_balance"),
-                ]))
+                const text = `Last update ${new Date} `
+                ctx.editMessageText(text+balance)
             } 
         });
     }
