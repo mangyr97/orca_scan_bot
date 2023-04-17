@@ -13,6 +13,7 @@ export class StartCommand extends Command {
             ctx.reply("First start message", Markup.inlineKeyboard([
                 Markup.button.callback("Like","bot_like"),
                 Markup.button.callback("Dislike","bot_dislike"),
+                Markup.button.callback("Add address","save_address"),
             ]))
         });
 
