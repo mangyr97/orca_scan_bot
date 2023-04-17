@@ -23,20 +23,17 @@ export class SaveCommand extends Command {
                 const address = this.extractEthAddress(text)
                 if (address) {
                     const wallet = await this.orca.createWallet({
-                        address: ctx.session.address!,
+                        address: address!,
                         telegram_user_id: ctx.message.from.id.toString()
                     })
-                    console.log(wallet);
-                    ctx.session.address = address;
+                    ctx.session.wallets? ctx.session.wallets.push(wallet):ctx.session.wallets=[wallet];
+                    console.log(ctx.session);
                     ctx.copyMessage(ctx.message.chat.id, keyboard);
                     this.saveMode = false;
                 } else {
                     ctx.reply('No address found, try again')
                 }
-              } else {
-                ctx.reply(`Ты написал: ${ctx}`);
-              }
-            
+            }
         })
     }
     private extractEthAddress(text: string): string | null {
@@ -47,5 +44,5 @@ export class SaveCommand extends Command {
         } else {
           return null;
         }
-      }
+    }
 }

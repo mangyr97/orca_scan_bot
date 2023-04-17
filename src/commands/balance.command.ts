@@ -10,10 +10,22 @@ export class BalanceCommand extends Command {
 
     handle(): void {
         this.bot.action("balance", async (ctx)=>{
-            if (ctx.session.address) {
-                
-            }
-            ctx.editMessageText("100 eth");
+            if (ctx.session.wallets) {
+                const balance = await this.orca.getBalance(ctx.session.wallets[0].address);
+                console.log(balance);
+                ctx.reply(balance, Markup.inlineKeyboard([
+                    Markup.button.callback("Update","update_balance"),
+                ]))
+            } 
+        });
+        this.bot.action("update_balance", async (ctx)=>{
+            if (ctx.session.wallets) {
+                const balance = await this.orca.getBalance(ctx.session.wallets[0].address);
+                console.log(balance);
+                ctx.reply(balance, Markup.inlineKeyboard([
+                    Markup.button.callback("Update","update_balance"),
+                ]))
+            } 
         });
     }
     

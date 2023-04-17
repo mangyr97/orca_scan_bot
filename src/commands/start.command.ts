@@ -10,7 +10,7 @@ export class StartCommand extends Command {
     handle(): void {
         this.bot.start((ctx) => {
             console.log(ctx.session);
-            ctx.reply("First start message", Markup.inlineKeyboard([
+            ctx.reply("Welcome to Orcascan!", Markup.inlineKeyboard([
                 Markup.button.callback("Like","bot_like"),
                 Markup.button.callback("Dislike","bot_dislike"),
                 Markup.button.callback("Add address","save_address"),

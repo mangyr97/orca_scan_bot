@@ -27,6 +27,12 @@ export class Orcascan implements IOrcascan {
         throw new Error("Method not implemented.");
     }
     async getBalance(address: string): Promise<string> {
-        throw new Error("Method not implemented.");
+        const response = await this.request.post('/balances', {address});
+        if (response.status === 201) {
+            const balance = response.data.balance
+            return balance
+        } else {
+            throw new Error(`Error response status: ${response.status}, ${response.statusText}`);
+        }
     }
 }
