@@ -2,7 +2,7 @@ import { Telegraf } from "telegraf";
 import { Command } from "./command.class";
 import { IBotContext } from "context/context.interface";
 import { IOrcascan } from "orcascan/orcascan.interface";
-import { balanceKeyboard } from "./buttons/buttons";
+import { menuKeyboard } from "./buttons/buttons";
 import { extractEthAddress } from "../utils/address-utils";
 
 export class SaveCommand extends Command {
@@ -13,8 +13,9 @@ export class SaveCommand extends Command {
 
     handle(): void {
         this.bot.action("save_address", async (ctx)=>{
-            this.saveMode = true  
-            ctx.editMessageText("Paste address");
+            this.saveMode = true;
+            ctx.deleteMessage()
+            ctx.reply("Paste address");
         });
         this.bot.on('text', async (ctx) => {
             if (this.saveMode) {
@@ -28,7 +29,9 @@ export class SaveCommand extends Command {
                     if (wallet) {
                         ctx.session.wallets? ctx.session.wallets.push(wallet):ctx.session.wallets=[wallet];
                         console.log(ctx.session);
-                        ctx.copyMessage(ctx.message.chat.id, balanceKeyboard);
+                        console.log(ctx.message.chat.id);
+                        
+                        ctx.reply('Address saved', menuKeyboard);
                         this.saveMode = false;
                     } else {
                         ctx.reply('Address already exist')

@@ -21,7 +21,7 @@ export class BalanceCommand extends Command {
                 const balance = await this.orca.getBalance(address);
                 if (balance) {
                     const reply = address+enter+balance
-                    ctx.reply(reply, updateBalanceKeyboard);
+                    ctx.editMessageText(reply, updateBalanceKeyboard);
                 } else {
                     ctx.reply('Something going wrong');
                 }
