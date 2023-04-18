@@ -27,8 +27,20 @@ export class Orcascan implements IOrcascan {
     async getWalletById(id: string): Promise<IWallet|undefined> {
         throw new Error("Method not implemented.");
     }
-    async getWalletByTgId(id: string): Promise<IWallet|undefined> {
-        throw new Error("Method not implemented.");
+    async getWalletsByTgId(id: string): Promise<IWallet[]|undefined> {
+        try {
+            const response = await this.request.get(`/wallets/wallet/tg/${id}`);
+            if (response.status === 200) {
+                const wallets = response.data
+                return wallets
+            } else {
+                console.log(`Error response status: ${response.status}, ${response.statusText}`);
+                return undefined
+            }
+        } catch (error) {
+            console.log(error);
+            return undefined
+        }
     }
     async getAllWallets(): Promise<IWallet[]|undefined> {
         throw new Error("Method not implemented.");

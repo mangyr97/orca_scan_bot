@@ -3,11 +3,12 @@ import LocalSession from "telegraf-session-local";
 
 import { Command } from "./commands/command.class";
 import { StartCommand } from "./commands/start.command";
+import { SaveCommand } from "./commands/save.command";
+import { BalanceCommand } from "./commands/balance.command";
+import { WalletsCommand } from "./commands/wallets.command";
 import { IConfigService } from "./config/config.interface";
 import { ConfigService } from "./config/confis.service";
 import { IBotContext } from "./context/context.interface";
-import { SaveCommand } from "./commands/save.command";
-import { BalanceCommand } from "./commands/balance.command";
 import { Orcascan } from "./orcascan/orcascan.service";
 
 
@@ -21,11 +22,16 @@ class Bot {
         this.orcascan = new Orcascan(this.configService.get('ORCASCAN_URL'))
     }
     init() {
-        this.commands = [new StartCommand(this.bot), new SaveCommand(this.bot, this.orcascan), new BalanceCommand(this.bot, this.orcascan)];
+        this.commands = [
+            new StartCommand(this.bot), 
+            new SaveCommand(this.bot, this.orcascan), 
+            new BalanceCommand(this.bot, this.orcascan), 
+            new WalletsCommand(this.bot, this.orcascan)
+        ];
         for (const command of this.commands) {
             command.handle();
         }
-        this.bot.launch()
+        this.bot.launch();
     }
 }
 
