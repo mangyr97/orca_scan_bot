@@ -9,5 +9,5 @@ export interface IOrcascan {
     getWalletById(id: string): Promise<IWallet|undefined>;
     getWalletsByTgId(id: string): Promise<IWallet[]|undefined>;
     getAllWallets(): Promise<IWallet[]|undefined>;
-    getBalance(address: string): Promise<string|undefined>;
+    getBalance(address: string): Promise<any|undefined>;
 }

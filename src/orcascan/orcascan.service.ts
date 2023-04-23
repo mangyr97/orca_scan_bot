@@ -49,7 +49,7 @@ export class Orcascan implements IOrcascan {
         try {
             const response = await this.request.post('/balances', {address});
             if (response.status === 201) {
-                const balance = response.data.balance
+                const balance = response.data.balances
                 return balance
             } else {
                 console.log(`Error response status: ${response.status}, ${response.statusText}`);
