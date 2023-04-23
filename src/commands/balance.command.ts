@@ -30,7 +30,6 @@ export class BalanceCommand extends Command {
             if (ctx.session.wallets) {
                 // @ts-ignore
                 const address = extractEthAddress(ctx.update.callback_query.message.text);
-                console.log(address);
                 const balances = await this.orca.getBalance(ctx.session.wallets[0].address);
                 const date = `Last update ${(new Date).toISOString()}`;
                 const reply = date + enter + address + enter + this.parseBalances(balances);
@@ -38,12 +37,15 @@ export class BalanceCommand extends Command {
             } 
         });
     }
-    parseBalances(balances: any) {
+    
+    parseBalances(balances: any): string {
         let reply = ''
         const tags = Object.keys(balances)
         for (const tag of tags) {
-            console.log(tag);
             const metadata = balances[tag].metadata
+            if (metadata.balance==='0' && balances[tag].tokens.length===0) {
+                continue
+            }
             reply += (
                 metadata.name + enter + '1) ' +
                 metadata.currency + ': ' + metadata.balance + enter
