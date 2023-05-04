@@ -1,7 +1,13 @@
 version: '2'
 services:
-  bruter:
+  bot:
     build: .
     image: orca-scan-bot-latest
     env_file:
       - .env
+    networks:
+      - orcascan
+networks:
+  orcascan:
+    name: orca_scan_default
+    external: true
