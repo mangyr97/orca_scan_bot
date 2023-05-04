@@ -34,7 +34,7 @@ export class SaveCommand extends Command {
                         ctx.reply('Address saved', menuKeyboard);
                         this.saveMode = false;
                     } else {
-                        ctx.reply('Address already exist')
+                        ctx.reply('Address already exist', menuKeyboard)
                     } 
                 } else {
                     ctx.reply('No address found, try again')
