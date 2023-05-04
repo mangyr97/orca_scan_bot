@@ -18,4 +18,4 @@ RUN npm run build
 RUN rm -rf /app/src
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-CMD node dist/index.js
+CMD node dist/app.js
